@@ -12,6 +12,8 @@
       <li>
         <strong><%= product.name %></strong> - $<%= product.price %>
         <p><%= product.description %></p>
+        <a href="/products/edit/<%= product._id %>">Edit</a> | 
+        <a href="/products/delete/<%= product._id %>">Delete</a>
       </li>
     <% }) %>
   <% } else { %>
