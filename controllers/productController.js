@@ -33,7 +33,6 @@ exports.getEditProduct = async (req, res) => {
   res.render("editProduct", { user: req.session.user, product });
 };
 
-// Handle edit
 exports.postEditProduct = async (req, res) => {
   if (!req.session.user || req.session.user.role !== "admin") return res.send("Access denied.");
 
@@ -42,7 +41,6 @@ exports.postEditProduct = async (req, res) => {
   res.redirect("/dashboard");
 };
 
-// Handle delete
 exports.deleteProduct = async (req, res) => {
   if (!req.session.user || req.session.user.role !== "admin") return res.send("Access denied.");
 

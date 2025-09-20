@@ -1,5 +1,5 @@
-const bcrypt = require("bcrypt");
 const User = require("../models/User");
+const authService = require("../services/authService");
 
 exports.getRegister = (req, res) => {
   res.render("register");
@@ -7,8 +7,8 @@ exports.getRegister = (req, res) => {
 
 exports.postRegister = async (req, res) => {
   const { username, password, role } = req.body;
-  const hashed = await bcrypt.hash(password, 10);
   try {
+    const hashed = await authService.hashPassword(password);
     await User.create({ username, password: hashed, role });
     res.redirect("/login");
   } catch (err) {
@@ -26,7 +26,7 @@ exports.postLogin = async (req, res) => {
 
   if (!user) return res.send("User not found");
 
-  const match = await bcrypt.compare(password, user.password);
+  const match = await authService.comparePassword(password, user.password);
   if (!match) return res.send("Invalid password");
 
   req.session.user = { id: user._id, role: user.role, username: user.username };

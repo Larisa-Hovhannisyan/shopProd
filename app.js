@@ -11,10 +11,8 @@ const authRouter = require("./routes/auth");
 
 const app = express();
 
-mongoose.connect("mongodb+srv://Larisa:larisapass@cluster0.gn5udjb.mongodb.net/productsDB?retryWrites=true&w=majority&appName=Cluster0", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect("mongodb+srv://Larisa:larisapass@cluster0.gn5udjb.mongodb.net/productsDB?retryWrites=true&w=majority&appName=Cluster0")
+  .then((res) => console.log("DB Connected!"));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
