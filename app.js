@@ -6,11 +6,14 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const expressLayouts = require("express-ejs-layouts");
+const dotenv = require("dotenv");
 
 const indexRouter = require("./routes/index");
 const authRouter = require("./routes/auth");
 
 const app = express();
+
+dotenv.config();
 
 mongoose.connect(process.env.MONGO_URI)
   .then((res) => console.log("DB Connected!"));
